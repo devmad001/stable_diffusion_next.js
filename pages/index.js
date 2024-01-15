@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 function Home() {
-  const [inputValue, setInputValue] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [inputValue, setInputValue] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
-    const response = await fetch('/api/stablediffusion', {
-      method: 'POST',
+    const response = await fetch("/api/stablediffusion", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ value: inputValue }),
     });
@@ -21,7 +21,7 @@ function Home() {
       const data = await response.json();
       setImageUrl(data[0]);
     } else {
-      console.error('Error:', response.statusText);
+      console.error("Error:", response.statusText);
     }
     setLoading(false);
   };
@@ -29,7 +29,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-green-500 to-cyan-400 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-green-500 to-blue-400 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
         <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
           <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
             <input
@@ -39,7 +39,11 @@ function Home() {
               className="w-full px-5 py-3 text-gray-700 bg-gray-200 rounded"
               placeholder="Enter a prompt..."
             />
-            <button type="submit" className="w-full px-3 py-4 text-white bg-gradient-to-r from-cyan-400 via-green-500 to-cyan-400 rounded-md focus:outline-none" disabled={loading}>
+            <button
+              type="submit"
+              className="w-full px-3 py-4 text-white bg-gradient-to-r from-blue-400 via-green-500 to-blue-400 rounded-md focus:outline-none"
+              disabled={loading}
+            >
               Submit
             </button>
           </form>
@@ -52,7 +56,11 @@ function Home() {
       )}
       {imageUrl && !loading && (
         <div className="mt-12 flex justify-center">
-          <img src={imageUrl} alt="Generated image" className="rounded-xl shadow-lg" />
+          <img
+            src={imageUrl}
+            alt="Generated image"
+            className="rounded-xl shadow-lg"
+          />
         </div>
       )}
       <style jsx>{`
